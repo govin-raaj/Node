@@ -18,3 +18,21 @@ myemitter.on("newSale",(stock)=>{
 });
 
 myemitter.emit("newSale",10);
+
+///////////////////////////////////////
+
+const server=http.createServer();
+
+server.on("request",(req,res)=>{
+    console.log("Req received ");
+    res.end("req received");
+});
+
+server.on("request",(req,res)=>{
+    console.log("Another Req received ");
+   
+});
+
+server.listen(8000,"127.0.0.1",()=>{
+    console.log("listening......");
+});
