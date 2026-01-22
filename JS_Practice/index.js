@@ -53,44 +53,38 @@
 // });
 // console.log(a);
 
+// const sq= (x) => x * x;
+// let b=arr.map(sq);
+// console.log(b);
+
 // let filtered=arr.filter(value=>{
 //   return value > 3;
 // });
 // console.log(filtered);
 
+// let r=arr.reduce((a,b)=>{
+//   return a+b;
+// })
+
+// console.log("reduce -- ",r);
+
 
 
 
 // let square1 = (x) => x * x;
-
 // console.log("square1 -- ",square1(3));
-
-
 // function myFunction2(w) {
-
 //     let square3 = (x) => x * x;
-
 //     console.log("Try myFunction.square -1-",square3(4));
-
 //     let myFunction4 = (w) => {
-
-//     function square5(x) {return  x * x}; // this is giving undefine why?
-
+//     function square5(x) {return  x * x}; // this is giving undefine why? coz u didnt return anything
 //     //let square5 = (x) =>  x * x;
-
 //     console.log("Try myFunction.square -2-",square5(4));
-
 //         return square5(5);
-
 //     }
-
 //   console.log("Try myFunction -3-",myFunction4(10));
-
 //   return square3(5);
-
-// }
- 
- 
+// } 
 // console.log("Try myFunction -4-",myFunction2(10));
 
  
