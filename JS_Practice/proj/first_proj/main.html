@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Array Utility App</title>
+
+</head>
+
+<body>
+
+    <div style="text-align: center; margin-top: 50px;">
+        <h2>Array Utility App</h2>
+
+        <input type="text" id="numbersInput" placeholder="Enter numbers (e.g. 1,2,3,4)">
+
+
+        <button onclick="processArray()">Process</button>
+        
+
+        <div id="original"></div>
+        <div id="doubled"></div>
+        <div id="even"></div>
+        <div id="odd"></div>
+        <div id="sum"></div>
+    </div>
+
+
+    <script>
+
+        function processArray() {
+            const input = document.getElementById("numbersInput").value;
+
+            const numbers = input.split(",").map(num => num.trim()).filter(num => num !== "").map(Number);
+
+            if (numbers.length === 0) {
+                alert("Please enter valid numbers");
+                return;
+            }
+
+            const doubled = numbers.map(num => num * 2);
+
+            const even = numbers.filter(num => num % 2 === 0);
+
+            const odd = numbers.filter(num => num % 2 !== 0);
+
+            const sum = numbers.reduce((total, num) => total + num);
+
+            document.getElementById("original").innerText = "Original Array: " + numbers;
+
+            document.getElementById("doubled").innerText = "Doubled Values: " + doubled;
+
+            document.getElementById("sum").innerText = "Sum: " + sum;
+
+            document.getElementById("even").innerText = "Even Numbers: " + even;
+
+            document.getElementById("odd").innerText = "Odd Numbers: " + odd;
+        }
+    </script>
+
+</body>
+
+</html>

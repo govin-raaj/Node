@@ -68,6 +68,17 @@
 
 // console.log("reduce -- ",r);
 
+// function details(name, college) {
+//   console.log("Name: ",name);
+//   console.log("College: ",college);
+//   return (...marks)=>{
+//     console.log("Top 5 Sub Marks: ",marks);
+//     console.log("Average Marks: ",marks.reduce((a,b)=>a+b)/marks.length);
+//   }
+// }
+
+// let res = details("Govin", "Vips");
+// res(85, 90, 95, 80, 75);
 
 
 
