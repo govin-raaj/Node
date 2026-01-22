@@ -12,7 +12,24 @@
 // console.log("-------------")
 // console.log(full); 
 
+const hello1=function (){
+    const name="Govin";
+    console.log(this);
 
+}
+hello1();
+
+function hello2(){
+    const name="Govin";
+    console.log(this);
+}hello2();
+
+const hello=()=>{
+    const name="Govin";
+    console.log(this);
+}
+console.log(this);
+hello();
 
 
 // function greet(name = "Guest") {
