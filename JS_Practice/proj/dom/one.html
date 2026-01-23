@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set timeout</title>
+</head>
+<body>
+    <h1>Set timeout and interval</h1>
+    <button class="start">start</button>
+    <button class="stop">stop</button>
+</body>
+<script>
+    // const st=setTimeout(function(){
+    //     console.log("hi");
+    // },2000);
+    let intervalId;
+    function printHi(){
+        intervalId=setInterval(()=>console.log("hi"),1000);
+    }
+    document.querySelector('.start').addEventListener('click',printHi);
+    document.querySelector('.stop').addEventListener('click',()=>clearInterval(intervalId));
+
+</script>
+
+</html>
