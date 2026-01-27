@@ -6,6 +6,8 @@ const todoInput = document.getElementById('todoInput');
 const addBtn = document.getElementById('addBtn');
 const todoList = document.getElementById('todoList');
 const filterBtns = document.querySelectorAll('.filter-btn');
+const themeToggle = document.getElementById('themeToggle');
+
 
 function saveTodos() {
     localStorage.setItem('todos', JSON.stringify(todos));
@@ -17,6 +19,19 @@ function loadTodos() {
         todos = JSON.parse(storedTodos);
     }
 }
+
+function saveTheme(theme) {
+    localStorage.setItem('theme', theme);
+}
+
+function loadTheme() {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark') {
+        document.body.classList.add('dark');
+        themeToggle.textContent = '☀️ Light Mode';
+    }
+}
+
 
 
 function addTodo() {
@@ -35,7 +50,8 @@ function addTodo() {
     const todo = {
         id: Date.now(),
         text: text,
-        completed: false
+        completed: false,
+        editing: false
     };
 
     todos.push(todo);
@@ -76,13 +92,67 @@ function renderTodos() {
     }
 
     todoList.innerHTML = filteredTodos.map(todo => `
-                <li class="todo-item ${todo.completed ? 'completed' : ''}">
-                    <input type="checkbox" ${todo.completed ? 'checked' : ''} onchange="toggleTodo(${todo.id})">
-                    <span>${todo.text}</span>
+    <li class="todo-item ${todo.completed ? 'completed' : ''}">
+        ${todo.editing
+            ? `
+                    <input
+                        type="text"
+                        value="${todo.text}"
+                        onkeypress="if(event.key === 'Enter') saveTodo(${todo.id}, this.value)"
+                        onblur="saveTodo(${todo.id}, this.value)"
+                        autofocus
+                    />
+                  `
+            : `
+                    <input
+                        type="checkbox"
+                        ${todo.completed ? 'checked' : ''}
+                        onchange="toggleTodo(${todo.id})"
+                    />
+                    <span ondblclick="editTodo(${todo.id})">${todo.text}</span>
+                    <button class="edit-btn" onclick="editTodo(${todo.id})">Edit</button>
                     <button class="delete-btn" onclick="deleteTodo(${todo.id})">Delete</button>
-                </li>
-            `).join('');
+                  `
+        }
+    </li>
+`).join('');
+
 }
+function saveTodo(id, newText) {
+    const text = newText.trim();
+    if (text === '') return;
+
+    const isDuplicate = todos.some(
+        todo =>
+            todo.text.toLowerCase() === text.toLowerCase() &&
+            todo.id !== id
+    );
+
+    if (isDuplicate) {
+        alert('This task already exists!');
+        return;
+    }
+
+    todos = todos.map(todo =>
+        todo.id === id
+            ? { ...todo, text, editing: false }
+            : todo
+    );
+
+    saveTodos();
+    renderTodos();
+}
+
+
+function editTodo(id) {
+    todos = todos.map(todo =>
+        todo.id === id
+            ? { ...todo, editing: true }
+            : { ...todo, editing: false }
+    );
+    renderTodos();
+}
+
 
 
 addBtn.addEventListener('click', addTodo);
@@ -99,5 +169,17 @@ filterBtns.forEach(btn => {
     });
 });
 
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+
+    const isDark = document.body.classList.contains('dark');
+    saveTheme(isDark ? 'dark' : 'light');
+
+    themeToggle.textContent = isDark
+        ? '☀️ Light Mode'
+        : '🌙 Dark Mode';
+});
+
+loadTheme();
 loadTodos();
 renderTodos();
