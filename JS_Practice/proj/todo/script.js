@@ -7,6 +7,18 @@ const addBtn = document.getElementById('addBtn');
 const todoList = document.getElementById('todoList');
 const filterBtns = document.querySelectorAll('.filter-btn');
 
+function saveTodos() {
+    localStorage.setItem('todos', JSON.stringify(todos));
+}
+
+function loadTodos() {
+    const storedTodos = localStorage.getItem('todos');
+    if (storedTodos) {
+        todos = JSON.parse(storedTodos);
+    }
+}
+
+
 function addTodo() {
     const text = todoInput.value.trim();
     if (text === '') return;
@@ -27,12 +39,14 @@ function addTodo() {
     };
 
     todos.push(todo);
+    saveTodos();
     todoInput.value = '';
     renderTodos();
 }
 
 function deleteTodo(id) {
     todos = todos.filter(todo => todo.id !== id);
+    saveTodos();
     renderTodos();
 }
 
@@ -40,6 +54,7 @@ function toggleTodo(id) {
     todos = todos.map(todo =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
     );
+    saveTodos();
     renderTodos();
 }
 
@@ -84,4 +99,5 @@ filterBtns.forEach(btn => {
     });
 });
 
+loadTodos();
 renderTodos();
