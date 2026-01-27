@@ -118,6 +118,16 @@ function renderTodos() {
 `).join('');
 
 }
+
+function editTodo(id) {
+    todos = todos.map(todo =>
+        todo.id === id
+            ? { ...todo, editing: true }
+            : { ...todo, editing: false }
+    );
+    renderTodos();
+}
+
 function saveTodo(id, newText) {
     const text = newText.trim();
     if (text === '') return;
@@ -140,16 +150,6 @@ function saveTodo(id, newText) {
     );
 
     saveTodos();
-    renderTodos();
-}
-
-
-function editTodo(id) {
-    todos = todos.map(todo =>
-        todo.id === id
-            ? { ...todo, editing: true }
-            : { ...todo, editing: false }
-    );
     renderTodos();
 }
 
