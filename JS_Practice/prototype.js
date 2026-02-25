@@ -31,8 +31,12 @@ const user1=new createUser("waylay","duelist")
 console.log(user1.print);
 user1.print()
 
-const user2=createUser("jett")
+const user2=new createUser("jett")
 user2.print()
+
+const user3=new createUser("neon")
+console.log(user3)
+console.log(user2)
 
 
 
