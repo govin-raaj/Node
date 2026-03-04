@@ -6,13 +6,22 @@ const UserSchema=new mongoose.Schema(
             type:String,
             required:true,
             unique:true,
-            lowercase:true
+            lowercase:true,
+            trim:true,
+            index:true
+        },
+        fullName:{
+            type:String,
+            required:true,
+            lowercase:true,
+            trim:true,
         },
         email:{
             type:String,
             required:true,
             unique:true,
-            lowercase:true
+            lowercase:true,
+            trim:true
         },
         password:{
             type:String,
@@ -20,6 +29,12 @@ const UserSchema=new mongoose.Schema(
         },
         avatar:{
             type:String,
+        },
+        coverImage:{
+            type:String,
+        },
+        refreshToken:{
+            type:String
         }
     },
     {timestamps:true}
